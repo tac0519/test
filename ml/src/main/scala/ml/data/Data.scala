@@ -1,4 +1,4 @@
-package ml
+package ml.data
 
 final class Data(val inputs: Array[Double], val outputs: Array[Double]) extends java.io.Serializable with java.lang.Cloneable {
   override def clone(): Data = {

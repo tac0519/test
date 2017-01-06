@@ -1,5 +1,7 @@
 package ml
 
+import ml.data.Data
+
 object Main {
   
   val patterns = 3
