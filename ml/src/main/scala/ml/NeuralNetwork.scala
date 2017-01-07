@@ -2,7 +2,6 @@ package ml
 
 import ml.util.ActivationFunction
 import ml.util.RamdomGenerator
-import ml.data.Data
 
 class NeuralNetwork(val func: ActivationFunction) {
 

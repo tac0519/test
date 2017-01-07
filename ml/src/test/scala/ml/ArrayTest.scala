@@ -1,4 +1,4 @@
-package ml.simple
+package ml
 
 object ArrayTest {
   def main(args: Array[String]): Unit = {
