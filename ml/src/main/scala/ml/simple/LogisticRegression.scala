@@ -50,7 +50,7 @@ object LogisticRegression {
 
   def minibatch(dataSet: Array[Data]): Array[Array[Data]] = {
     val sets = new Array[Array[Data]](dataSet.size / minibatchSize)
-    for (i <- 0 to sets.size) {
+    for (i <- 0 to sets.size - 1) {
       sets(i) = dataSet.slice(i * minibatchSize, (i + 1) * minibatchSize - 1)
     }
     sets
@@ -83,8 +83,8 @@ class LogisticRegression(trainSetSize: Int, testSetSize: Int) {
   makeData(random3, random3, Array(0, 0, 1), trainSetSize, testSetSize)
 
   private def makeData(random1: Random, random2: Random, correctOutputs: Array[Int], trainSetSize: Int, testSetSize: Int) {
-    for (i <- 0 to trainSetSize) trainSet += newData(random1, random2, correctOutputs)
-    for (i <- 0 to testSetSize) testSet += newData(random1, random2, correctOutputs)
+    for (i <- 0 to trainSetSize - 1) trainSet += newData(random1, random2, correctOutputs)
+    for (i <- 0 to testSetSize - 1) testSet += newData(random1, random2, correctOutputs)
   }
 
   private def newData(random1: Random, random2: Random, correctOutputs: Array[Int]): Data = {

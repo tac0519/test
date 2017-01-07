@@ -5,6 +5,7 @@ import ml.Data
 object Evaluater {
 
   def evaluate(actualDataSet: Array[Data], predictDataSet: Array[Data]) {
+    println("TODO implement")
 
   }
 
