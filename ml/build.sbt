@@ -1,4 +1,4 @@
-name := """hello-scala"""
+name := """ml"""
 
 version := "1.0"
 
