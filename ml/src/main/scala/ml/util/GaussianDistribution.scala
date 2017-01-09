@@ -3,7 +3,6 @@ package ml.util
 import scala.util.Random
 
 class GaussianDistribution(mean: Double, variance: Double) extends Random {
-
   /*
    * TODO it seems to use Box-Muller transform
    * https://en.wikipedia.org/wiki/Box–Muller_transform

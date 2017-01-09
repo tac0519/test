@@ -22,7 +22,7 @@ object LogisticRegression {
   val trainSet = logisticRegression.trainSet.toArray
   val testSet = logisticRegression.testSet.toArray
   // define neuralNetwork
-  val neuralNetwork = new NeuralNetwork(new ActivationFunction("sigmoid"))
+  val neuralNetwork = new NeuralNetwork(new ActivationFunction("softmax"))  //TODO bug fix
 
   def main(args: Array[String]): Unit = {
     train()
@@ -74,9 +74,9 @@ class LogisticRegression(trainSetSize: Int, testSetSize: Int) {
   val trainSet = new ArrayBuffer[Data]
   val testSet = new ArrayBuffer[Data]
 
-  private val random1 = new GaussianDistribution(-2.0, 0.0)
-  private val random2 = new GaussianDistribution(2.0, 0.0)
-  private val random3 = new GaussianDistribution(1.0, 0.0)
+  private val random1 = new GaussianDistribution(-2.0, 1.0)
+  private val random2 = new GaussianDistribution(2.0, 1.0)
+  private val random3 = new GaussianDistribution(0.0, 1.0)
 
   makeData(random1, random2, Array(1, 0, 0), trainSetSize, testSetSize)
   makeData(random2, random1, Array(0, 1, 0), trainSetSize, testSetSize)
