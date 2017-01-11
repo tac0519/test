@@ -22,7 +22,7 @@ object LogisticRegression {
   val trainSet = logisticRegression.trainSet.toArray
   val testSet = logisticRegression.testSet.toArray
   // define neuralNetwork
-  val neuralNetwork = new NeuralNetwork(new ActivationFunction("softmax"))  //TODO bug fix
+  val neuralNetwork = new NeuralNetwork(ActivationFunction.softmax)
 
   def main(args: Array[String]): Unit = {
     train()

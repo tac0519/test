@@ -13,16 +13,22 @@ class NeuralNetwork(val func: ActivationFunction) {
     if (bias == null) bias = RamdomGenerator.fillRandomMinMax(data.outputs.size)
   }
 
+
   def activate(data: Data) {
+    if(func.multi) activeteNeurons(true, data)
+    else activeteNeurons(false, data)
+  }
+  private def activeteNeurons(multi: Boolean, data: Data) {
     init(data)
     for (o <- 0 to data.outputs.size - 1) {
-      var stimulus: Double = 0
       for (i <- 0 to data.inputs.size - 1) {
-        stimulus += weights(o)(i) * data.inputs(i)
+        data.outputs(o) += weights(o)(i) * data.inputs(i)
       }
-      stimulus += bias(o)
-      data.outputs(o) = func.activate(stimulus)
+      data.outputs(o) += bias(o)
+      if (!multi) data.outputs(o) = func.activate(data.outputs(o))
     }
+    if (multi) func.activates(data.outputs)
+
   }
 
   def train(data: Data, learningRate: Double): Array[Double] = {
