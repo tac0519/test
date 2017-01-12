@@ -38,12 +38,12 @@ class RamdomGenerator(val self: scala.util.Random) {
   }
 
   def fillRandomMinMax(count: Int): Array[Double] = {
-    val weightRange = 1 / count
+    val weightRange = 1.0 / count
     Seq.fill(count)(uniform(-weightRange, weightRange)).toArray
   }
 
   def uniform(min: Double, max: Double): Double = {
-    self.nextDouble() * (max * min) + min;
+    self.nextDouble() * (max - min) + min;
   }
 
 }
