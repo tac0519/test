@@ -41,8 +41,8 @@ sealed abstract class ActivationFunction(val name: String, val multi: Boolean) {
 
   private def softmax(outputs: Array[Double]): Unit = {
     val max = outputs.max
-    outputs.map(output => Math.exp(output - max))
+    for (o <- 0 until outputs.size) outputs(o) = Math.exp(outputs(o) - max)
     val sum = outputs.sum
-    outputs.map(output => output / sum)
+    for (o <- 0 until outputs.size) outputs(o) = outputs(o) / sum
   }
 }

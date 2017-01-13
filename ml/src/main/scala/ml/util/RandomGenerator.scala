@@ -2,15 +2,16 @@ package ml.util
 
 import scala.util.Random
 
-object RamdomGenerator extends RamdomGenerator {
+object RandomGenerator extends RandomGenerator {
 
-  def gaussianDistribution(mean: Double, variance: Double): RamdomGenerator = {
+  def gaussianDistribution(mean: Double, variance: Double): RandomGenerator = {
     val gaussianDistribution = new GaussianDistribution(mean, variance)
-    new RamdomGenerator(gaussianDistribution)
+    new RandomGenerator(gaussianDistribution)
   }
 }
 
-class RamdomGenerator(val self: scala.util.Random) {
+class RandomGenerator(val self: scala.util.Random) {
+  Random.setSeed(1234)
   def this() = this(Random)
 
   def binomial(n: Int, p: Double): Int = {

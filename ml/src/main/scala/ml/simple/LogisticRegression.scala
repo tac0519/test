@@ -12,7 +12,7 @@ import ml.util.GaussianDistribution
 object LogisticRegression {
 
   // train setting
-  val epochs = 2000
+  val epochs = 1
   var learningRate = 0.2
   val minibatchSize = 50
   val trainSetSize = 400
@@ -33,9 +33,9 @@ object LogisticRegression {
 
   def train() {
     val sets = minibatch(trainSet)
-    for (i <- 0 to epochs) {
+    for (i <- 0 until epochs) {
       sets.foreach(dataSet => {
-        dataSet.foreach(data => { neuralNetwork.train(data, learningRate / minibatchSize) })
+          dataSet.foreach(data => { neuralNetwork.train(data, learningRate / minibatchSize) })
       })
       learningRate *= 0.95
     }

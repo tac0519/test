@@ -10,7 +10,7 @@ object Data {
 
 }
 
-final class Data(val inputs: Array[Double], val outputs: Array[Double]) extends java.io.Serializable with java.lang.Cloneable {
+final class Data(var inputs: Array[Double], var outputs: Array[Double]) extends java.io.Serializable with java.lang.Cloneable {
 
   def this(data: Data) = {
     this(data.inputs.clone(), data.outputs.clone())

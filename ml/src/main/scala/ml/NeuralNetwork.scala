@@ -1,7 +1,7 @@
 package ml
 
 import ml.util.ActivationFunction
-import ml.util.RamdomGenerator
+import ml.util.RandomGenerator
 
 class NeuralNetwork(val func: ActivationFunction) {
 
@@ -9,16 +9,16 @@ class NeuralNetwork(val func: ActivationFunction) {
   var bias: Array[Double] = null
 
   private def init(data: Data) {
-    if (weights == null) weights = RamdomGenerator.fill2DRandom(data.outputs.size, data.inputs.size)
-    if (bias == null) bias = RamdomGenerator.fillRandomMinMax(data.outputs.size)
+    if (weights == null) weights = RandomGenerator.fill2DRandom(data.outputs.size, data.inputs.size)
+    if (bias == null) bias = RandomGenerator.fillRandomMinMax(data.outputs.size)
   }
 
 
   def activate(data: Data) {
-    if(func.multi) activeteNeurons(true, data)
-    else activeteNeurons(false, data)
+    if(func.multi) activateNeurons(true, data)
+    else activateNeurons(false, data)
   }
-  private def activeteNeurons(multi: Boolean, data: Data) {
+  private def activateNeurons(multi: Boolean, data: Data) {
     init(data)
     for (o <- 0 to data.outputs.size - 1) {
       for (i <- 0 to data.inputs.size - 1) {
@@ -34,7 +34,7 @@ class NeuralNetwork(val func: ActivationFunction) {
   def train(data: Data, learningRate: Double): Array[Double] = {
     init(data)
     val prediction = data.clone;
-    activate(data)
+    activate(prediction)
     train(prediction, data, learningRate)
   }
 
