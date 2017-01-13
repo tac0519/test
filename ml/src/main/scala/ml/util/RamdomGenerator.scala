@@ -3,7 +3,7 @@ package ml.util
 import scala.util.Random
 
 object RamdomGenerator extends RamdomGenerator {
-  
+
   def gaussianDistribution(mean: Double, variance: Double): RamdomGenerator = {
     val gaussianDistribution = new GaussianDistribution(mean, variance)
     new RamdomGenerator(gaussianDistribution)

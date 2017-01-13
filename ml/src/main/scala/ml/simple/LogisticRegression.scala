@@ -26,7 +26,7 @@ object LogisticRegression {
 
   def main(args: Array[String]): Unit = {
     train()
-    val predictSet = testSet.clone()
+    val predictSet = Data.copy(testSet)
     test(predictSet)
     Evaluater.evaluate(testSet, predictSet)
   }
@@ -35,7 +35,7 @@ object LogisticRegression {
     val sets = minibatch(trainSet)
     for (i <- 0 to epochs) {
       sets.foreach(dataSet => {
-        dataSet.foreach(data => { neuralNetwork.train(data, learningRate) })
+        dataSet.foreach(data => { neuralNetwork.train(data, learningRate / minibatchSize) })
       })
       learningRate *= 0.95
     }
