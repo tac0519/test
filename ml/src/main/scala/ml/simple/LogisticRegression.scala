@@ -6,20 +6,20 @@ import scala.util.Random
 import ml.Data
 import ml.NeuralNetwork
 import ml.util.ActivationFunction
-import ml.util.Evaluater
+import ml.util.Evaluator
 import ml.util.GaussianDistribution
 
 object LogisticRegression {
 
   // train setting
-  val epochs = 1
+  val epochs = 2000
   var learningRate = 0.2
   val minibatchSize = 50
   val trainSetSize = 400
   val testSetSize = 60
   // create LogisticRegression and get trainSet and testSet for each classes
   val logisticRegression = new LogisticRegression(trainSetSize, testSetSize)
-  val trainSet = logisticRegression.trainSet.toArray
+  val trainSet = Random.shuffle(logisticRegression.trainSet).toArray
   val testSet = logisticRegression.testSet.toArray
   // define neuralNetwork
   val neuralNetwork = new NeuralNetwork(ActivationFunction.softmax)
@@ -28,14 +28,14 @@ object LogisticRegression {
     train()
     val predictSet = Data.copy(testSet)
     test(predictSet)
-    Evaluater.evaluate(testSet, predictSet)
+    Evaluator.evaluate(testSet, predictSet)
   }
 
   def train() {
     val sets = minibatch(trainSet)
     for (i <- 0 until epochs) {
       sets.foreach(dataSet => {
-          dataSet.foreach(data => { neuralNetwork.train(data, learningRate / minibatchSize) })
+        dataSet.foreach(data => { neuralNetwork.train(data, learningRate / minibatchSize) })
       })
       learningRate *= 0.95
     }
@@ -50,8 +50,8 @@ object LogisticRegression {
 
   def minibatch(dataSet: Array[Data]): Array[Array[Data]] = {
     val sets = new Array[Array[Data]](dataSet.size / minibatchSize)
-    for (i <- 0 to sets.size - 1) {
-      sets(i) = dataSet.slice(i * minibatchSize, (i + 1) * minibatchSize - 1)
+    for (i <- 0 until sets.size) {
+      sets(i) = dataSet.slice(i * minibatchSize, (i + 1) * minibatchSize)
     }
     sets
   }

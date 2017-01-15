@@ -9,19 +9,22 @@ class NeuralNetwork(val func: ActivationFunction) {
   var bias: Array[Double] = null
 
   private def init(data: Data) {
-    if (weights == null) weights = RandomGenerator.fill2DRandom(data.outputs.size, data.inputs.size)
-    if (bias == null) bias = RandomGenerator.fillRandomMinMax(data.outputs.size)
+    if (weights == null || bias == null) {
+      bias = Seq.fill(data.outputs.size)(0.0).toArray
+      weights = Seq.fill(data.outputs.size)(Seq.fill(data.inputs.size)(0.0).toArray).toArray
+    }
   }
 
 
   def activate(data: Data) {
-    if(func.multi) activateNeurons(true, data)
+    init(data)
+    if (func.multi) activateNeurons(true, data)
     else activateNeurons(false, data)
   }
+
   private def activateNeurons(multi: Boolean, data: Data) {
-    init(data)
-    for (o <- 0 to data.outputs.size - 1) {
-      for (i <- 0 to data.inputs.size - 1) {
+    for (o <- 0 until data.outputs.size) {
+      for (i <- 0 until data.inputs.size) {
         data.outputs(o) += weights(o)(i) * data.inputs(i)
       }
       data.outputs(o) += bias(o)
@@ -32,20 +35,19 @@ class NeuralNetwork(val func: ActivationFunction) {
   }
 
   def train(data: Data, learningRate: Double): Array[Double] = {
-    init(data)
-    val prediction = data.clone;
+    val prediction = data.copyInputs;
     activate(prediction)
     train(prediction, data, learningRate)
   }
 
   private def train(prediction: Data, data: Data, learningRate: Double): Array[Double] = {
     val error: Array[Double] = new Array[Double](data.outputs.size)
-    for (o <- 0 to data.outputs.size - 1) {
+    for (o <- 0 until data.outputs.size) {
       error(o) = prediction.outputs(o) - data.outputs(o);
-      for (i <- 0 to data.inputs.size - 1) {
-        weights(o)(i) += -error(o) * data.inputs(i) * learningRate
+      for (i <- 0 until data.inputs.size) {
+        weights(o)(i) -= error(o) * data.inputs(i) * learningRate
       }
-      bias(o) += -error(o) * learningRate
+      bias(o) -= error(o) * learningRate
     }
     error
   }

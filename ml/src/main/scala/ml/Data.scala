@@ -20,4 +20,8 @@ final class Data(var inputs: Array[Double], var outputs: Array[Double]) extends 
     new Data(inputs.clone(), outputs.clone())
   }
 
+  def copyInputs(): Data ={
+    new Data(inputs.clone(), Seq.fill(outputs.size)(0.0).toArray)
+  }
+
 }

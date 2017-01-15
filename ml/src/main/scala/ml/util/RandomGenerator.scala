@@ -11,7 +11,6 @@ object RandomGenerator extends RandomGenerator {
 }
 
 class RandomGenerator(val self: scala.util.Random) {
-  Random.setSeed(1234)
   def this() = this(Random)
 
   def binomial(n: Int, p: Double): Int = {
@@ -34,7 +33,6 @@ class RandomGenerator(val self: scala.util.Random) {
   }
 
   def fill2DRandom(outer: Int, inner: Int): Array[Array[Double]] = {
-    var array2D: Array[Array[Double]] = Array.ofDim[Double](outer, inner)
     Seq.fill(outer)(fillRandomMinMax(inner)).toArray
   }
 
