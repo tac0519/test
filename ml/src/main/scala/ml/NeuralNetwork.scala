@@ -1,7 +1,6 @@
 package ml
 
 import ml.util.ActivationFunction
-import ml.util.RandomGenerator
 
 class NeuralNetwork(val func: ActivationFunction) {
 
