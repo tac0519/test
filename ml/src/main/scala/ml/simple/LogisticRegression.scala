@@ -43,7 +43,7 @@ object LogisticRegression {
 
   private def test(predictSet: Array[Data]) {
     predictSet.foreach(data => {
-      neuralNetwork.activate(data)
+      neuralNetwork.output(data)
       predict(data)
     })
   }
