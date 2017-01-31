@@ -1,6 +1,7 @@
 package ml
 
 import ml.util.ActivationFunction
+import ml.util.RandomGenerator
 
 class NeuralNetwork(val func: ActivationFunction) {
 
@@ -14,6 +15,12 @@ class NeuralNetwork(val func: ActivationFunction) {
     }
   }
 
+  def initRandom(data: Data) {
+    if (weights == null || bias == null) {
+        weights = RandomGenerator.fill2DRandom(data.outputs.size, data.inputs.size)
+      bias = RandomGenerator.fillRandomMinMax(data.inputs.size)
+    }
+  }
 
   def output(data: Data) {
     init(data)
@@ -48,7 +55,7 @@ class NeuralNetwork(val func: ActivationFunction) {
     error
   }
 
-  def updateParam(o:Int, error:Array[Double], data: Data, learningRate: Double): Unit ={
+  def updateParam(o: Int, error: Array[Double], data: Data, learningRate: Double): Unit = {
     for (i <- 0 until data.inputs.size) {
       weights(o)(i) -= error(o) * data.inputs(i) * learningRate
     }

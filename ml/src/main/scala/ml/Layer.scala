@@ -2,10 +2,12 @@ package ml
 
 import ml.util.ActivationFunction
 
-class Layer(data: Data, func: ActivationFunction) {
+class Layer(val data: Data, func: ActivationFunction) {
 
-  val neuralNetwork = new NeuralNetwork(func);
+  val neuralNetwork = new NeuralNetwork(func)
+  neuralNetwork.initRandom(data)
   val error = new Array[Double](data.outputs.size)
+
 
   def backward(aboveLayer: Layer, learningRate: Double) {
     for (o <- 0 until data.outputs.size) {
