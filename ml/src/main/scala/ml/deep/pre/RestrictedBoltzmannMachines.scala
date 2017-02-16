@@ -1,6 +1,7 @@
 package ml.deep.pre
 
-import ml.Data
+import ml.simple.Perceptron
+import ml.{Data, Layers, NeuralNetwork}
 
 object RestrictedBoltzmannMachines {
 
@@ -13,16 +14,26 @@ object RestrictedBoltzmannMachines {
 
   }
 
-  def propup(mean:Array[Int], ): Unit = {
+  def mean(layers:Layers, up:Boolean): Double ={
+//    for (h <- 0 until layers.hiddenData.size) {
+//      for (v <- 0 until layers.visibleData.size) {
+//        data.outputs(o) += weights(o)(i) * data.inputs(i)
+//      }
+//      data.outputs(o) += bias(o)
+//    }
 
+
+    null
   }
+
+
 
   def main(args: Array[String]): Unit = {
 
   }
 }
 
-class RestrictedBoltzmannMachines(visibleLayer: Layer, hiddenLayer: Layer) {
+class RestrictedBoltzmannMachines(layers: Layers) {
 
   def train(): Array[Array[Double]] = {
     null
